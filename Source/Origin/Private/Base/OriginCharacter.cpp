@@ -14,7 +14,7 @@ AOriginCharacter::AOriginCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	// Create Capsule
+	// Create Capsules
 	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
 
 	// Make it the Root
@@ -36,17 +36,23 @@ void AOriginCharacter::BeginPlay()
 
 	Super::BeginPlay(); 
 
-    if (USaveManagerSubsystem* SaveSubsystem =
+    if (USaveManagerSubsystem* Save =
         GetGameInstance()->GetSubsystem<USaveManagerSubsystem>())
     {
-        SaveSubsystem->OnGameLoaded.AddUObject(
+        Save->OnGameLoaded.AddUObject(
             this,
             &AOriginCharacter::HandleLoad);
 
-        SaveSubsystem->OnGameSaved.AddUObject(
+        Save->OnGameSaved.AddUObject(
             this,
             &AOriginCharacter::HandleSave);
+
+        if (USaveGameData* Loaded = Save->GetSaveGame())
+        {
+            HandleLoad(Loaded);
+        }
     }
+
     if (UHealthComponent* Health =
         FindComponentByClass<UHealthComponent>())
     {
@@ -146,15 +152,21 @@ void AOriginCharacter::TakeDamageTest()
 void AOriginCharacter::HandleSave(USaveGameData* SaveGame)
 {
     SaveGame->PlayerTransform = GetActorTransform();
+    UE_LOG(LogTemp, Warning, TEXT("Save Character Transform"));
 }
 
 void AOriginCharacter::HandleLoad(USaveGameData* SaveGame)
 {
-    URespawnSubsystem* Respawn =
-        GetGameInstance()->GetSubsystem<URespawnSubsystem>();
-    if (!Respawn) return;
+    if (!SaveGame)
+    {
+        return;
+    }
 
-    Respawn->RespawnPlayer(this, SaveGame->PlayerTransform);
+    SetActorTransform(SaveGame->PlayerTransform);
+
+    UE_LOG(LogTemp, Warning,
+        TEXT("Player Restored = %s"),
+        *SaveGame->PlayerTransform.GetLocation().ToString());
 }
 
 void AOriginCharacter::HandleDeath()

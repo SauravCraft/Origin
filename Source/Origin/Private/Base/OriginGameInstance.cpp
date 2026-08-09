@@ -10,6 +10,7 @@ void UOriginGameInstance::Init()
     if (USaveManagerSubsystem* SaveSubsystem =
         GetSubsystem<USaveManagerSubsystem>())
     {
+        
         SaveSubsystem->LoadGame();
     }
 }

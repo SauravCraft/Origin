@@ -160,8 +160,10 @@ void URespawnSubsystem::HandleSave(USaveGameData* SaveGame)
         return;
     }
 
-    SaveGame->CurrentCheckpointTransform = CurrentCheckpoint;
-    SaveGame->ActiveCheckpoints = CurrentActiveCheckpoints;
+    SaveGame->CurrentCheckpointTransform =
+        CurrentCheckpoint;
+    SaveGame->ActiveCheckpoints =
+        CurrentActiveCheckpoints;
 
     UE_LOG(LogTemp, Log,
         TEXT("Saved Checkpoint: %s"),
@@ -186,8 +188,12 @@ void URespawnSubsystem::HandleLoad(USaveGameData* SaveGame)
         return;
     }
 
-    CurrentCheckpoint = SaveGame->CurrentCheckpointTransform;
-    CurrentActiveCheckpoints = SaveGame->ActiveCheckpoints;
+    CurrentCheckpoint =
+        SaveGame->CurrentCheckpointTransform;
+    CurrentActiveCheckpoints =
+        SaveGame->ActiveCheckpoints;
+    LoadedPlayerTransform =
+        SaveGame->PlayerTransform;
 
     UE_LOG(LogTemp, Log,
         TEXT("Loaded Checkpoint: %s"),

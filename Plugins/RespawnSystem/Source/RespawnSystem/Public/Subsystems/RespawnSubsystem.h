@@ -39,7 +39,7 @@ public:
 
     void ActivateCheckpoint(FName CheckpointId);
 
-
+    FTransform LoadedPlayerTransform;
 
     // Save System 
 
