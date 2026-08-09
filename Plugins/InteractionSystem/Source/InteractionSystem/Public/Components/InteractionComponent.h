@@ -22,6 +22,10 @@ public:
 	UFUNCTION()
 	void Interaction();
 
+	// PlayerController 
+	APlayerController* PC;
+	APawn* Pawn;
+
 protected:
 
 	void UpdateInteractable();		

@@ -11,6 +11,16 @@ UInteractionComponent::UInteractionComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+
+    Pawn = Cast<APawn>(GetOwner());
+    if (!Pawn) return;
+
+    PC = Cast<APlayerController>(Pawn->GetController());
+
+    if (!PC)
+    {
+        return;
+    }
 }
 
 
@@ -29,16 +39,6 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 void UInteractionComponent::UpdateInteractable()
 {
-
-    APawn* Pawn = Cast<APawn>(GetOwner());
-    if (!Pawn) return;
-
-    APlayerController* PC = Cast<APlayerController>(Pawn->GetController());
-
-    if (!PC)
-    {
-        return;
-    }
 
     int32 ViewportX, ViewportY;
     PC->GetViewportSize(ViewportX, ViewportY);
