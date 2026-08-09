@@ -46,8 +46,6 @@ void AOriginCharacter::BeginPlay()
         SaveSubsystem->OnGameSaved.AddUObject(
             this,
             &AOriginCharacter::HandleSave);
-
-        SaveSubsystem->LoadGame();
     }
     if (UHealthComponent* Health =
         FindComponentByClass<UHealthComponent>())
@@ -119,7 +117,8 @@ void AOriginCharacter::SaveGameTest()
 
     if (SaveSubsystem)
     {
-        SaveSubsystem->SaveGame();
+        //SaveSubsystem->SaveGame();
+        UE_LOG(LogTemp, Warning, TEXT("Character Save Game"));
     }
 }
 
