@@ -37,7 +37,7 @@ public:
 
     /* Health System */
     UPROPERTY(BlueprintReadWrite)
-    float Health;
+    float CurrentHealth;
 
     /** Save Slot */
     UPROPERTY(BlueprintReadWrite)

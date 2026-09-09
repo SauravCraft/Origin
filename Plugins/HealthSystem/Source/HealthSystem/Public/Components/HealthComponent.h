@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
+class USaveGameData;
 
 DECLARE_MULTICAST_DELEGATE(FOnHealthChanged);
 DECLARE_MULTICAST_DELEGATE(FOnDeath);
@@ -29,6 +30,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Kill();
+
+	UFUNCTION()
+	void HandleSave(USaveGameData* SaveGame);
+
+	UFUNCTION()
+	void HandleLoad(USaveGameData* SaveGame);
 
 
 

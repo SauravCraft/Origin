@@ -30,17 +30,14 @@
 			"Name": "InteractionSystem",
 			"Enabled": true
 		},
-
 		{
 			"Name": "SaveSystem",
 			"Enabled": true
 		},
-
 		{
 			"Name": "HealthSystem",
 			"Enabled": true
 		},
-
 		{
 			"Name": "MotionWarping",
 			"Enabled": true
@@ -67,6 +64,38 @@
 		},
 		{
 			"Name": "Chooser",
+			"Enabled": true
+		},
+		{
+			"Name": "DeformerGraph",
+			"Enabled": true
+		},
+		{
+			"Name": "MoverExamples",
+			"Enabled": true
+		},
+		{
+			"Name": "DrawDebugLibrary",
+			"Enabled": true
+		},
+		{
+			"Name": "MetaHumanCoreTech",
+			"Enabled": true
+		},
+		{
+			"Name": "ChaosMover",
+			"Enabled": true
+		},
+		{
+			"Name": "GameplayInteractions",
+			"Enabled": true
+		},
+		{
+			"Name": "SmartObjects",
+			"Enabled": true
+		},
+		{
+			"Name": "CurveExpression",
 			"Enabled": true
 		}
 	]

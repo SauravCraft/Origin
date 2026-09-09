@@ -38,6 +38,7 @@ public class HealthSystem : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"SaveSystem",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

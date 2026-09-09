@@ -2,6 +2,8 @@
 
 
 #include "Components/HealthComponent.h"
+#include "SaveGames/SaveGameData.h"
+#include "Subsystems/SaveManagerSubsystem.h"
 #include "Interfaces/Damagable.h"
 
 // Sets default values for this component's properties
@@ -24,6 +26,18 @@ void UHealthComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
+
+	if (USaveManagerSubsystem* Save = GetWorld()->GetGameInstance()->GetSubsystem<USaveManagerSubsystem>())
+	{
+		// BroadCast
+		Save->OnGameSaved.AddUObject(
+			this,
+			&UHealthComponent::HandleSave);
+
+		Save->OnGameLoaded.AddUObject(
+			this,
+			&UHealthComponent::HandleLoad);
+	}
 	
 }
 
@@ -62,3 +76,30 @@ void UHealthComponent::Kill()
 	OnDeath.Broadcast();
 }
 
+void UHealthComponent::HandleSave(USaveGameData* SaveGame)
+{
+	if (!SaveGame)
+	{
+		return;
+	}
+
+	SaveGame->CurrentHealth = CurrentHealth;
+
+	UE_LOG(LogTemp, Warning,
+		TEXT("Saved Health = %.1f"),
+		CurrentHealth);
+}
+
+void UHealthComponent::HandleLoad(USaveGameData* SaveGame)
+{
+	if (!SaveGame)
+	{
+		return;
+	}
+
+	CurrentHealth = SaveGame->CurrentHealth;
+
+	UE_LOG(LogTemp, Warning,
+		TEXT("Loaded Health = %.1f"),
+		CurrentHealth);
+}
